@@ -179,7 +179,11 @@ namespace SharpVectors.Converters.Utils
             {
                 if (dirSecurity != null)
                 {
+#if NET40
                     targetInfo.Create(dirSecurity);
+#elif NETCOREAPP
+                    targetInfo.Create();
+#endif
                 }
                 else
                 {
@@ -200,9 +204,9 @@ namespace SharpVectors.Converters.Utils
             return _copiedCount;
         }
 
-        #endregion    
+#endregion
 
-        #region Private Methods
+#region Private Methods
 
         private void Copy(DirectoryInfo source, DirectoryInfo target)
         {
@@ -232,8 +236,12 @@ namespace SharpVectors.Converters.Utils
                 DirectoryInfo targetInfo = null;
                 if (_includeSecurity)
                 {
-                    targetInfo = target.CreateSubdirectory(sourceInfo.Name,
+#if NET40
+                    targetInfo.CreateSubdirectory(sourceInfo.Name,
                         sourceInfo.GetAccessControl());
+#elif NETCOREAPP
+                    targetInfo.CreateSubdirectory(sourceInfo.Name);
+#endif
                 }
                 else
                 {
@@ -274,14 +282,16 @@ namespace SharpVectors.Converters.Utils
                 fi.CopyTo(filePath, _isOverwrite);
 
                 File.SetAttributes(filePath, fileAttr);
+#if NET40
                 // if required to set the security or access control
                 if (_includeSecurity)
                 {
                     File.SetAccessControl(filePath, fi.GetAccessControl());
                 }
+#endif
             }
         }
 
-        #endregion
+#endregion
     }
 }

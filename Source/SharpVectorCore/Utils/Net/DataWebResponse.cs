@@ -1,7 +1,6 @@
 using System;
 using System.Net;
 using System.IO;
-using System.Web;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -28,7 +27,11 @@ namespace SharpVectors.Net
         {
             this._responseUri = uri;
 
-            string fullUri = HttpUtility.UrlDecode(uri.AbsoluteUri);
+#if NET40
+            string fullUri = System.Web.HttpUtility.UrlDecode(uri.AbsoluteUri);
+#elif NETSTANDARD
+            string fullUri = WebUtility.UrlDecode(uri.AbsoluteUri);
+#endif
             fullUri = fullUri.Replace(' ', '+');
 
             // remove all whitespace
@@ -77,8 +80,12 @@ namespace SharpVectors.Net
                             _contentEncoding = Encoding.ASCII;
                         }
                     }
-
-                    _decodedData = HttpUtility.UrlDecodeToBytes(data);
+#if NET40
+                    _decodedData = System.Web.HttpUtility.UrlDecodeToBytes(data);
+#elif NETSTANDARD
+                    var encodedData = _contentEncoding.GetBytes(data);
+                    _decodedData = WebUtility.UrlDecodeToBytes(encodedData, 0, encodedData.Length);
+#endif
                 }
             }
             else
