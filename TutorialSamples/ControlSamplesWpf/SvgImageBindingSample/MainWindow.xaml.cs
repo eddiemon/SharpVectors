@@ -23,18 +23,18 @@ namespace SvgImageBindingSample
             // ICons credit: https://github.com/icons8/flat-color-icons
             string workingDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
-            string iconsPath = Path.Combine(workingDir, PageMultiple.IconZipFile);
+            string iconsPath = Path.Combine(workingDir, "..", PageMultiple.IconZipFile);
             if (!File.Exists(iconsPath))
             {
                 return;
             }
 
-            var iconsDir = new DirectoryInfo(Path.Combine(workingDir, PageMultiple.IconFolder));
+            var iconsDir = new DirectoryInfo(Path.Combine(workingDir, "..", PageMultiple.IconFolder));
             if (!iconsDir.Exists)
             {
                 iconsDir.Create();
 
-                ZipFile.ExtractToDirectory(iconsPath, workingDir);
+                ZipFile.ExtractToDirectory(iconsPath, Path.Combine(workingDir, ".."));
             }
         }
     }

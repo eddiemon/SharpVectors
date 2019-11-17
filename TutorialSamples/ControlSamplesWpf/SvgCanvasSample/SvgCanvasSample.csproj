@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.0;net452</TargetFrameworks>
     <OutputType>WinExe</OutputType>
-    <UseWpf>true</UseWpf>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWpf>true</UseWpf>
     <OutputPath>Output\</OutputPath>
     <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
