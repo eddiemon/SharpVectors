@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
+#if NET40
 using System.Runtime.Remoting.Messaging;
+#endif
 
 namespace SharpVectors.Converters
 {
@@ -9,7 +11,7 @@ namespace SharpVectors.Converters
     /// </summary>
     public sealed class ConsoleWorker
     {
-        #region Private Fields
+#region Private Fields
 
         private int _count;
         private int _maxCount;
@@ -20,9 +22,9 @@ namespace SharpVectors.Converters
 
         private DoWorkEventHandler _eventHandler;
 
-        #endregion
+#endregion
 
-        #region Constructors and Destructor
+#region Constructors and Destructor
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConsoleWorker"/> class.
@@ -41,9 +43,9 @@ namespace SharpVectors.Converters
             _eventHandler   = new DoWorkEventHandler(this.OnDoWork);
         }
 
-        #endregion
+#endregion
 
-        #region Public Events
+#region Public Events
 
         /// <summary>
         /// Occurs when [do work].
@@ -58,9 +60,9 @@ namespace SharpVectors.Converters
         /// </summary>
         public event ProgressChangedEventHandler ProgressChanged;
 
-        #endregion
+#endregion
 
-        #region Public Properties
+#region Public Properties
 
         /// <summary>
         /// Gets a value indicating whether this instance is busy.
@@ -94,9 +96,9 @@ namespace SharpVectors.Converters
             }
         }
 
-        #endregion
+#endregion
 
-        #region Public Methods
+#region Public Methods
 
         /// <summary>
         /// Runs the worker async.
@@ -180,9 +182,9 @@ namespace SharpVectors.Converters
             this.OnProgressChanged(new ProgressChangedEventArgs(percentProgress, userState));
         }
 
-        #endregion
+#endregion
 
-        #region Private Methods
+#region Private Methods
 
         /// <summary>
         /// Called when [do work].
@@ -223,9 +225,11 @@ namespace SharpVectors.Converters
 
             try
             {
+#if NET40
                 var doWorkDelegate = (DoWorkEventHandler)((AsyncResult)ar).AsyncDelegate;
 
                 doWorkDelegate.EndInvoke(ar);
+#endif
 
                 if (this.RunWorkerCompleted != null)
                 {
@@ -245,6 +249,6 @@ namespace SharpVectors.Converters
             _count--;
         }
 
-        #endregion
+#endregion
     }
 }

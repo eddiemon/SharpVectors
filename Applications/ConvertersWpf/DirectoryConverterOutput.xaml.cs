@@ -538,6 +538,7 @@ namespace SharpVectors.Converters
                 }
 
                 DirectoryInfo targetInfo = null;
+#if NET
                 if (_includeSecurity)
                 {
                     targetInfo = target.CreateSubdirectory(sourceInfo.Name,
@@ -547,6 +548,9 @@ namespace SharpVectors.Converters
                 {
                     targetInfo = target.CreateSubdirectory(sourceInfo.Name);
                 }
+#elif NETCORE
+                    targetInfo = target.CreateSubdirectory(sourceInfo.Name);
+#endif
                 targetInfo.Attributes = fileAttr;
 
                 this.ProcessConversion(e, sourceInfo, targetInfo);
@@ -596,10 +600,12 @@ namespace SharpVectors.Converters
 
                         FileSecurity security = null;
 
+#if NET
                         if (_includeSecurity)
                         {
                             security = File.GetAccessControl(svgFileName);
                         }
+#endif
 
                         if (_worker.CancellationPending)
                         {
@@ -627,11 +633,13 @@ namespace SharpVectors.Converters
                             {
                                 File.SetAttributes(xamlFile, fileAttr);
 
+#if NET
                                 // if required to set the security or access control
                                 if (_includeSecurity)
                                 {
                                     File.SetAccessControl(xamlFile, security);
                                 }
+#endif
                             }
                         }
                         if (_options.SaveZaml)
@@ -642,11 +650,13 @@ namespace SharpVectors.Converters
                             {
                                 File.SetAttributes(zamlFile, fileAttr);
 
+#if NET
                                 // if required to set the security or access control
                                 if (_includeSecurity)
                                 {
                                     File.SetAccessControl(zamlFile, security);
                                 }
+#endif
                             }
                         }
 
@@ -660,11 +670,13 @@ namespace SharpVectors.Converters
                             {
                                 File.SetAttributes(imageFile, fileAttr);
 
+#if NET
                                 // if required to set the security or access control
                                 if (_includeSecurity)
                                 {
                                     File.SetAccessControl(imageFile, security);
                                 }
+#endif
                             }
                         }
 
@@ -702,9 +714,9 @@ namespace SharpVectors.Converters
             }
         }
 
-        #endregion
+#endregion
 
-        #region IObservable Members
+#region IObservable Members
 
         public void Cancel()
         {
@@ -732,6 +744,6 @@ namespace SharpVectors.Converters
             _observer = observer;
         }
 
-        #endregion
+#endregion
     }
 }
