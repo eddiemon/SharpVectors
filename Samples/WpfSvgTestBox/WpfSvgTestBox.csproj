@@ -30,18 +30,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="WpfSvgTestBox.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\SvgLogo.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Output.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Debug.svg" />
     <Resource Include="Images\Settings.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Copy.svg" />
     <Resource Include="Images\Cut.svg" />
     <Resource Include="Images\Delete.svg" />
@@ -54,13 +46,29 @@
     <Resource Include="Images\Save.svg" />
     <Resource Include="Images\Undo.svg" />
     <Resource Include="Images\WordWrap.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Number.svg" />
     <Resource Include="Images\Space.svg" />
+    <Resource Include="Images\SvgLogoBasic.svg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\SvgLogoBasic.svg" />
+    <Compile Update="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.6.0" />
