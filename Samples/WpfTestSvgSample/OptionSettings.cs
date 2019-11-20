@@ -59,7 +59,7 @@ namespace WpfTestSvgSample
         public OptionSettings()
         {
             _wpfSettings = new WpfDrawingSettings();
-            string currentDir = Path.GetFullPath(@".\Samples");
+            string currentDir = Path.GetFullPath(@"..\Samples");
             if (!Directory.Exists(currentDir))
             {
                 Directory.CreateDirectory(currentDir);
