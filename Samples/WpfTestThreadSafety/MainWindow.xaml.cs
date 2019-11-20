@@ -62,7 +62,7 @@ namespace WpfTestThreadSafety
         private delegate void AppendTextDelegate(string msg, string style);
 
         private const string W3CDirPrefix = "Svg";
-        private const string LocalDirBase = @"..\..\..\W3cSvgTestSuites\";
+        private const string LocalDirBase = @"..\..\..\..\W3cSvgTestSuites\";
 
         [DllImport("Shlwapi.dll", EntryPoint = "PathIsDirectoryEmpty")]
         [return: MarshalAs(UnmanagedType.Bool)]
