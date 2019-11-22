@@ -100,7 +100,7 @@ namespace WpfW3cSvgTestSuite
             this.Closing += OnWindowClosing;
 
             _drawingDir = IoPath.Combine(IoPath.GetDirectoryName(
-                System.Reflection.Assembly.GetExecutingAssembly().Location), "XamlDrawings");
+                System.Reflection.Assembly.GetExecutingAssembly().Location), "..", "XamlDrawings");
 
             if (!Directory.Exists(_drawingDir))
             {
@@ -992,7 +992,7 @@ namespace WpfW3cSvgTestSuite
 
             _testResults = new List<SvgTestResult>();
 
-            _testResultsPath = IoPath.GetFullPath(selectedSuite.ResultFileName);
+            _testResultsPath = IoPath.GetFullPath(IoPath.Combine("..", selectedSuite.ResultFileName));
             if (!string.IsNullOrWhiteSpace(_testResultsPath) && File.Exists(_testResultsPath))
             {
                 XmlReaderSettings settings = new XmlReaderSettings();
@@ -1006,7 +1006,7 @@ namespace WpfW3cSvgTestSuite
                 }
             }
 
-            string fullFilePath = IoPath.GetFullPath(selectedSuite.TestFileName);
+            string fullFilePath = IoPath.GetFullPath(IoPath.Combine("..", selectedSuite.TestFileName));
             if (!string.IsNullOrWhiteSpace(fullFilePath) && File.Exists(fullFilePath))
             {
                 XmlReaderSettings settings = new XmlReaderSettings();

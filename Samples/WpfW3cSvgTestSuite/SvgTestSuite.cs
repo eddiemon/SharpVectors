@@ -12,7 +12,7 @@ namespace WpfW3cSvgTestSuite
 
         public const int TestSuiteCount     = 3;
 
-        public const string LocalDirBase    = @"..\..\W3cSvgTestSuites\";
+        public const string LocalDirBase    = @"..\..\..\W3cSvgTestSuites\";
         public const string WebDirBase      = "https://github.com/ElinamLLC/SharpVectors-TestSuites/raw/master/";
 
         public const string FileExtXml      = ".xml";
